@@ -7,17 +7,25 @@ public class PlayerMove : MonoBehaviour
     //public float speed;
     //public float runSpeed;
 
-    [SerializeField]private float speed; //usando o SerializeField faz com que também fique público a variável na unity
-    [SerializeField]private float runSpeed;
+    [SerializeField] private float speed; //usando o SerializeField faz com que também fique público a variável na unity
+    [SerializeField] private float runSpeed;
+
+    private Rigidbody2D rig;
 
     private float initialSpeed;
-    private Rigidbody2D rig;
+    private bool _isRunning;
     private Vector2 _direction;
 
     public Vector2 direction
     {
         get { return _direction; }
         set { _direction = value; }
+    }
+
+    public bool isRunning
+    {
+        get { return _isRunning; }
+        set { _isRunning = value; }
     }
 
     private void Start()
@@ -38,26 +46,28 @@ public class PlayerMove : MonoBehaviour
 
     #region Movement
 
-        void OnInput()
-        {
+    void OnInput()
+    {
         _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        }
-        void OnMove()
-        {
+    }
+    void OnMove()
+    {
         rig.MovePosition(rig.position + _direction * speed * Time.fixedDeltaTime);
-        }
+    }
 
-        void OnRun()
+    void OnRun()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                speed = runSpeed;            
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                speed = initialSpeed;            
-            }
+            speed = runSpeed;
+            _isRunning = true;
         }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = initialSpeed;
+            _isRunning = false;
+        }
+    }
     #endregion
 }
