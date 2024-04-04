@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     private float initialSpeed;
     private bool _isRunning;
     private bool _isRolling;
+    private bool _isCutting;
     private Vector2 _direction;
 
     public Vector2 direction
@@ -34,6 +35,12 @@ public class PlayerMove : MonoBehaviour
         set { _isRolling = value; }
     }
 
+    public bool isCutting
+    {
+        get { return _isCutting; }
+        set { _isCutting = value; }
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -44,6 +51,7 @@ public class PlayerMove : MonoBehaviour
         OnInput();
         OnRun();
         OnRoll();
+        OnCutting();
     }
 
     private void FixedUpdate()
@@ -52,6 +60,20 @@ public class PlayerMove : MonoBehaviour
     }
 
     #region Movement
+
+    void OnCutting()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            isCutting = true;
+            speed = 0;
+        }
+        if (Input.GetMouseButtonUp(0)) 
+        {
+            isCutting = false;
+            speed = initialSpeed;
+        }
+    }
 
     void OnInput()
     {
