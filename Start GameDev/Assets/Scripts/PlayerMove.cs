@@ -16,7 +16,10 @@ public class PlayerMove : MonoBehaviour
     private bool _isRunning;
     private bool _isRolling;
     private bool _isCutting;
+    private bool _isDigging;
     private Vector2 _direction;
+
+    private int handlingObj;
 
     public Vector2 direction
     {
@@ -41,6 +44,12 @@ public class PlayerMove : MonoBehaviour
         set { _isCutting = value; }
     }
 
+    public bool isDigging
+    {
+        get { return _isDigging; }
+        set { _isDigging = value; }
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -48,10 +57,21 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            handlingObj = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            handlingObj = 2;
+        }
+
         OnInput();
         OnRun();
         OnRoll();
         OnCutting();
+        OnDig();
     }
 
     private void FixedUpdate()
@@ -61,19 +81,41 @@ public class PlayerMove : MonoBehaviour
 
     #region Movement
 
-    void OnCutting()
+    void OnDig()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (handlingObj == 2) 
         {
-            isCutting = true;
-            speed = 0;
-        }
-        if (Input.GetMouseButtonUp(0)) 
-        {
-            isCutting = false;
-            speed = initialSpeed;
+            if (Input.GetMouseButtonDown(0))
+            {
+                isDigging = true;
+                speed = 0;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDigging = false;
+                speed = initialSpeed;
+            }
+
         }
     }
+
+    void OnCutting()
+    {
+        if (handlingObj == 1) 
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                isCutting = true;
+                speed = 0;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                isCutting = false;
+                speed = initialSpeed;
+            }
+        }
+    }
+
 
     void OnInput()
     {
