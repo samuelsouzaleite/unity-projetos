@@ -6,6 +6,8 @@ public class PlayerAnim : MonoBehaviour
 {
     private PlayerMove player;
     private Animator anim;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,11 @@ public class PlayerAnim : MonoBehaviour
         if (player.isDigging)
         {
             anim.SetInteger("Transition", 4);
+        }
+
+        if (player.isWatering)
+        {
+            anim.SetInteger("Transition", 5);
         }
     }
 

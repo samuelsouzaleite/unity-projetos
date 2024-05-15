@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float speed; //usando o SerializeField faz com que também fique público a variável na unity
     [SerializeField] private float runSpeed;
 
+    private PlayerItems PlayerItems;
     private Rigidbody2D rig;
 
     private float initialSpeed;
@@ -17,6 +18,8 @@ public class PlayerMove : MonoBehaviour
     private bool _isRolling;
     private bool _isCutting;
     private bool _isDigging;
+    private bool _isWatering;
+
     private Vector2 _direction;
 
     private int handlingObj;
@@ -50,19 +53,31 @@ public class PlayerMove : MonoBehaviour
         set { _isDigging = value; }
     }
 
+    public bool isWatering
+    {
+        get { return _isWatering; }
+        set { _isWatering = value; }
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         initialSpeed = speed;
+        PlayerItems = GetComponent<PlayerItems>();
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            handlingObj = 1;
+            handlingObj = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            handlingObj = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             handlingObj = 2;
         }
@@ -72,6 +87,7 @@ public class PlayerMove : MonoBehaviour
         OnRoll();
         OnCutting();
         OnDig();
+        OnWatering();
     }
 
     private void FixedUpdate()
@@ -81,9 +97,33 @@ public class PlayerMove : MonoBehaviour
 
     #region Movement
 
+    void OnWatering()
+    {
+        if (handlingObj == 2)
+        {
+            if (Input.GetMouseButtonDown(0) && PlayerItems.currentWater > 0) //&& = E (e tambem) quando quero adicionar outra condição pra ser feita junto com outra
+            {
+                
+                isWatering = true;
+                speed = 0;
+            }
+            if (Input.GetMouseButtonUp(0) || PlayerItems.currentWater < 0) // || = OU (Ou isso ou aquilo) quando é para ser outra opção quando não atingir a outra condição
+            {
+                isWatering = false;
+                speed = initialSpeed;
+            }
+
+            if(isWatering) //enquanto for true
+            {
+                PlayerItems.currentWater -= 0.01f;
+            }
+
+        }
+    }
+
     void OnDig()
     {
-        if (handlingObj == 2) 
+        if (handlingObj == 1) 
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -101,7 +141,7 @@ public class PlayerMove : MonoBehaviour
 
     void OnCutting()
     {
-        if (handlingObj == 1) 
+        if (handlingObj == 0) 
         {
             if (Input.GetMouseButtonDown(0))
             {
