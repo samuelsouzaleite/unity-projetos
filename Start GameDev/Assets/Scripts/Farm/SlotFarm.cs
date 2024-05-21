@@ -55,7 +55,7 @@ public class SlotFarm : MonoBehaviour
         
     }
 
-    public void OnHit()
+    public void OnHit() //isso é um método
     {
         digAmount--;
 

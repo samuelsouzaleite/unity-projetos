@@ -532,7 +532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 195.8, y: 178}
+  m_AnchoredPosition: {x: 192.1, y: 178}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &240078570
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18776,6 +18776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   runSpeed: 0
+  handlingObj: 0
 --- !u!50 &279529854
 Rigidbody2D:
   serializedVersion: 4
@@ -25318,7 +25319,7 @@ GameObject:
   - component: {fileID: 918177193}
   - component: {fileID: 918177192}
   m_Layer: 5
-  m_Name: Image
+  m_Name: woodBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25368,7 +25369,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -25652,6 +25653,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd1df251b6af474ca26ac2ea085632b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterUIBar: {fileID: 1377257885}
+  woodUIBar: {fileID: 918177192}
+  carrotUIBar: {fileID: 1896277185}
+  toolsUI:
+  - {fileID: 240078570}
+  - {fileID: 2112564703}
+  - {fileID: 1491592201}
+  selectColor: {r: 0.99215686, g: 1, b: 1, a: 1}
+  alphaColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!4 &995524844
 Transform:
   m_ObjectHideFlags: 0
@@ -26737,7 +26747,7 @@ GameObject:
   - component: {fileID: 1377257886}
   - component: {fileID: 1377257885}
   m_Layer: 5
-  m_Name: Image
+  m_Name: waterBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26787,7 +26797,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -26966,7 +26976,7 @@ GameObject:
   - component: {fileID: 1491592202}
   - component: {fileID: 1491592201}
   m_Layer: 5
-  m_Name: Carrot
+  m_Name: Watering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27005,7 +27015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27598,6 +27608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   runSpeed: 8
+  handlingObj: 0
 --- !u!95 &1705798453
 Animator:
   serializedVersion: 5
@@ -27646,6 +27657,9 @@ MonoBehaviour:
   totalWood: 0
   carrots: 0
   currentWater: 0
+  waterLimit: 50
+  carrotLimit: 10
+  woodLimit: 5
 --- !u!1 &1759647537
 GameObject:
   m_ObjectHideFlags: 0
@@ -32498,7 +32512,7 @@ GameObject:
   - component: {fileID: 1896277186}
   - component: {fileID: 1896277185}
   m_Layer: 5
-  m_Name: Image
+  m_Name: carrotBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32548,7 +32562,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -32728,7 +32742,7 @@ GameObject:
   - component: {fileID: 2112564704}
   - component: {fileID: 2112564703}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Shovel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32767,7 +32781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

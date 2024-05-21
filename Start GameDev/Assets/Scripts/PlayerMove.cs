@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 _direction;
 
-    private int handlingObj;
+    [HideInInspector] public int handlingObj; //O HideInInspector faz com que a variavel public não apareca na unity
 
     public Vector2 direction
     {
