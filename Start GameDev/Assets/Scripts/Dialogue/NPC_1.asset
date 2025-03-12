@@ -25,6 +25,6 @@ MonoBehaviour:
   - actorName: 
     profile: {fileID: 0}
     sentence:
-      portuguese: Vamos FLAMENGO!!
+      portuguese: Como se chama ?
       english: Lets go MENGO
       spanish: "El MENG\xC3O"

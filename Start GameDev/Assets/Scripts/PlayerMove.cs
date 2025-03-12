@@ -7,6 +7,8 @@ public class PlayerMove : MonoBehaviour
     //public float speed;
     //public float runSpeed;
 
+    public bool isPaused;
+
     [SerializeField] private float speed; //usando o SerializeField faz com que também fique público a variável na unity
     [SerializeField] private float runSpeed;
 
@@ -67,32 +69,41 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(!isPaused)
         {
-            handlingObj = 0;
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                handlingObj = 0;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            handlingObj = 1;
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                handlingObj = 1;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            handlingObj = 2;
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                handlingObj = 2;
+            }
 
-        OnInput();
-        OnRun();
-        OnRoll();
-        OnCutting();
-        OnDig();
-        OnWatering();
+            OnInput();
+            OnRun();
+            OnRoll();
+            OnCutting();
+            OnDig();
+            OnWatering();
+        }
     }
+
+       
 
     private void FixedUpdate()
     {
-        OnMove();
+        if(!isPaused)
+        {
+            OnMove();
+        }
+        
     }
 
     #region Movement
