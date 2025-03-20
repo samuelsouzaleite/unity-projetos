@@ -9,14 +9,14 @@ public class Skeleton : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] private AnimationControl animControl;
 
-    private PlayerMove player;
+    //private PlayerMove player;
     
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = FindObjectOfType<PlayerMove>();
+        //player = FindObjectOfType<PlayerMove>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -40,7 +40,7 @@ public class Skeleton : MonoBehaviour
 
         }
 
-        float posX = player.transform.position.x - transform.position.x;
+        float posX = target.transform.position.x - transform.position.x;
         if (posX > 0)
         {
             transform.eulerAngles = new Vector2(0, 0);
@@ -50,4 +50,6 @@ public class Skeleton : MonoBehaviour
             transform.eulerAngles = new Vector2(0, 180);
         }
     }
+
+    
 }
