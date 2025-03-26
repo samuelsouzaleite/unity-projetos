@@ -112,7 +112,7 @@ public class PlayerAnim : MonoBehaviour
 
         if (hit != null) //utilizando "!=" estou dizendo que o hit é diferente de null
         {
-            Debug.Log("acertou o inimigo");
+            hit.GetComponentInChildren<AnimationControl>().onHit();
         }
     }
 
