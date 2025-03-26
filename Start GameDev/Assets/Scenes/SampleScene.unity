@@ -28525,6 +28525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f12bc2afdca0a44a32ed0652284a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: {fileID: 68975971}
+  radius: 0.28
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &1705798455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28884,7 +28889,7 @@ GameObject:
   - component: {fileID: 1792913862}
   - component: {fileID: 1792913861}
   - component: {fileID: 1792913864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}

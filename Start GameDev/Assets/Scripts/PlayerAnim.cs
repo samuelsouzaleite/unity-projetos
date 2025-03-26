@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
+    [Header("Attack Settings")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float radius;
+    [SerializeField] private LayerMask enemyLayer;
+
     private PlayerMove player;
     private Animator anim;
 
     private casting cast;
-    
+
+    private bool isHitting;
+    private float recoveryTime = 1f; //1 segundo
+    private float timeCount;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +32,19 @@ public class PlayerAnim : MonoBehaviour
     {
         OnMove();
         OnRun();
-    }
+
+        if (isHitting) 
+        {
+            timeCount += Time.deltaTime; //faz com que seja somado em segundos em tempo real
+
+            if (timeCount > recoveryTime)
+            {
+                isHitting = false;
+                timeCount = 0f;
+            }
+        }
+        
+    }   
 
     #region movement
 
@@ -83,6 +103,26 @@ public class PlayerAnim : MonoBehaviour
 
 
     #endregion
+
+    #region Attack
+
+    public void OnAttack()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, radius, enemyLayer);
+
+        if (hit != null) //utilizando "!=" estou dizendo que o hit é diferente de null
+        {
+            Debug.Log("acertou o inimigo");
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, radius);
+    }
+
+    #endregion
+
     //É chamado quando o jogador pressiona o botão de ação na lagoa
     public void OnCastingStarted()
     {
@@ -104,5 +144,14 @@ public class PlayerAnim : MonoBehaviour
     public void OnHammeringEnded()
     {
         anim.SetBool("hammering", false);
+    }
+
+    public void OnHit() 
+    {
+        if (!isHitting) // com ! estou dizendo que é falso
+        {
+            anim.SetTrigger("hit");
+            isHitting = true;
+        }
     }
 }
