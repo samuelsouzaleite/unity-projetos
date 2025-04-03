@@ -36,6 +36,12 @@ public class House : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null || playerAnim == null || playerItems == null)
+        {
+            Debug.LogWarning("Referências do jogador não foram encontradas!");
+            return; // Sai do Update se algo estiver faltando
+        }
+
         if (detectingPlayer && Input.GetKeyDown(KeyCode.E) && playerItems.totalWood >= woodAmount)
         {
             //Construção é inicializada
