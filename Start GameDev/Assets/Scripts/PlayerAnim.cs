@@ -14,6 +14,7 @@ public class PlayerAnim : MonoBehaviour
 
     private casting cast;
 
+    public bool isTalking;
     private bool isHitting;
     private float recoveryTime = 1f; //1 segundo
     private float timeCount;
@@ -43,7 +44,15 @@ public class PlayerAnim : MonoBehaviour
                 timeCount = 0f;
             }
         }
-        
+
+        if (isTalking)
+        {
+           player.isPaused = true;
+        }
+        else
+        {
+           player.isPaused = false;
+        }
     }   
 
     #region movement

@@ -33,7 +33,7 @@ public class DialogueControl : MonoBehaviour
 
     public static DialogueControl instance;
 
-    private PlayerMove player;
+    private PlayerAnim player;
 
     //public bool IsShowing { get => isShowing; set => isShowing = value;  } //fará com que fique publico a variável booleana isShowing
 
@@ -47,7 +47,7 @@ public class DialogueControl : MonoBehaviour
     //chamado ao inicializar
     void Start()
     {
-        player = FindObjectOfType<PlayerMove>();
+        player = FindObjectOfType<PlayerAnim>();
     }
 
     
@@ -81,7 +81,7 @@ public class DialogueControl : MonoBehaviour
                 dialogueObj.SetActive(false);
                 sentences = null;
                 isShowing = false;
-                player.isPaused = false;
+                player.isTalking = false;
             }
         }
     }
@@ -98,7 +98,7 @@ public class DialogueControl : MonoBehaviour
             actorNameText.text = currentActorName[index];
             StartCoroutine(TypeSentence());
             isShowing = true;
-            player.isPaused = true;
+            player.isTalking = true;
            
         }
     }
