@@ -28,8 +28,12 @@ public class DialogueControl : MonoBehaviour
     public bool isShowing; //se a janela esta visível - usando na frente da variável [HideInInspector] fará ela ser privada mesmo colocando como public
     private int index; //index das sentenças(falas/textos)
     private string[] sentences;
+    private string[] currentActorName;
+    private Sprite[] actorSprite;
 
     public static DialogueControl instance;
+
+    private PlayerMove player;
 
     //public bool IsShowing { get => isShowing; set => isShowing = value;  } //fará com que fique publico a variável booleana isShowing
 
@@ -37,20 +41,16 @@ public class DialogueControl : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        
     }
 
     //chamado ao inicializar
     void Start()
     {
-        
+        player = FindObjectOfType<PlayerMove>();
     }
 
     
-    void Update()
-    {
-        
-    }
-
     IEnumerator TypeSentence()
     {
         foreach(char letter in sentences[index].ToCharArray())
@@ -62,33 +62,44 @@ public class DialogueControl : MonoBehaviour
     //pular próxima fase/fala
     public void NextSentence()
     {
+        
         if(speechText.text == sentences[index])
         {
             if(index < sentences.Length -1) 
             {
                 index++;
+                profileSprite.sprite = actorSprite[index];
+                actorNameText.text = currentActorName[index];
                 speechText.text = "";
                 StartCoroutine(TypeSentence());
             }
             else //quando terminam os textos 
             {
                 speechText.text = "";
+                actorNameText.text = "";
                 index = 0;
                 dialogueObj.SetActive(false);
                 sentences = null;
                 isShowing = false;
+                player.isPaused = false;
             }
         }
     }
     //chamar a fala do npc
-    public void Speech(string[] txt)
+    public void Speech(string[] txt, string[] actorName, Sprite[] actorProfile)
     {
         if (!isShowing) 
         {
             dialogueObj.SetActive(true);
             sentences = txt;
+            currentActorName = actorName;
+            actorSprite = actorProfile;
+            profileSprite.sprite = actorSprite[index];
+            actorNameText.text = currentActorName[index];
             StartCoroutine(TypeSentence());
             isShowing = true;
+            player.isPaused = true;
+           
         }
     }
 }
