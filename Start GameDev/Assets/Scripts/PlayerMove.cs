@@ -95,10 +95,10 @@ public class PlayerMove : MonoBehaviour
             OnWatering();
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("teste");
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SceneManager.LoadScene("teste");
+        //}
 
     }
 
