@@ -61,7 +61,7 @@ Start GameDev/
 └── ProjectSettings/
 ```
 
-## 🚀 Como executar
+## Como executar
 
 1. Instale o **Unity Hub** e a versão **2022.3.22f1** da Unity.
 2. Clone este repositório:
@@ -72,10 +72,6 @@ Start GameDev/
 4. Abra o projeto e carregue a cena `Assets/Scenes/MainMenu.unity`.
 5. Pressione **Play** para jogar dentro do editor.
 
-## 📌 Status
+## Status
 
 Projeto em desenvolvimento contínuo, usado como estudo prático de desenvolvimento de jogos 2D na Unity.
-
----
-
-Feito por [Samuel Souza Leite](https://github.com/samuelsouzaleite) 🎯
